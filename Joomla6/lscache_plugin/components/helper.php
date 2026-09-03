@@ -136,6 +136,12 @@ class LSCacheComponentsHelper
         if($com_instance==NULL){
             return array();
         }
-        return $com_instance->getComMap();
+
+        try{
+            $com_instance->getComMap();
+        }
+        catch(Exception $e){
+            return array();
+        }
     }
 }

@@ -395,10 +395,12 @@ class plgSystemLSCache extends CMSPlugin {
             try {
                 $menus     = $this->getSiteMap();
                 $crawlList = array_map(function ($m) { return $m->path; }, $menus);
-                $recacheComponent = $this->settings->get('recacheComponent', false);
-                if ($recacheComponent) {
-                    $compUrls  = $this->componentHelper->getComMap($recacheComponent);
-                    $crawlList = array_merge($compUrls, $crawlList);
+                $recacheComponents = $this->settings->get('recacheComponents', array());
+                if (!empty($recacheComponents)) {
+                    foreach ($recacheComponents as $recacheComponent) {
+                        $compUrls  = $this->componentHelper->getComMap($recacheComponent);
+                        $crawlList = array_merge($compUrls, $crawlList);
+                    }    
                 }
             } catch (\Throwable $e) {
                 $crawlList = [];
@@ -1942,10 +1944,12 @@ class plgSystemLSCache extends CMSPlugin {
             $urls = array_map(function($menu) {
                 return $menu->path;
             }, $menus);
-            $recacheComponent = $this->settings->get('recacheComponent', false);
-            if ($recacheComponent) {
-                $compUrls = $this->componentHelper->getComMap($recacheComponent);
-                $urls = array_merge($compUrls,$urls);
+            $recacheComponents = $this->settings->get('recacheComponents', array());
+            if (!empty($recacheComponents)) {
+                foreach ($recacheComponents as $recacheComponent) {
+                    $compUrls  = $this->componentHelper->getComMap($recacheComponent);
+                    $crawlList = array_merge($compUrls, $crawlList);
+                }    
             }
         } else if ($this->purgeObject->autoRecache > 0) {
             $urls = $this->purgeObject->urls;
