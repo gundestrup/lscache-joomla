@@ -138,7 +138,7 @@ class LSCacheComponentsHelper
         }
         
         try{
-            $com_instance->getComMap();
+            return $com_instance->getComMap();
         }
         catch(Exception $e){
             return array();

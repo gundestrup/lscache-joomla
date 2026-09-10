@@ -1948,7 +1948,7 @@ class plgSystemLSCache extends CMSPlugin {
             if (!empty($recacheComponents)) {
                 foreach ($recacheComponents as $recacheComponent) {
                     $compUrls  = $this->componentHelper->getComMap($recacheComponent);
-                    $crawlList = array_merge($compUrls, $crawlList);
+                    $urls = array_merge($compUrls, $urls);
                 }    
             }
         } else if ($this->purgeObject->autoRecache > 0) {
